@@ -5,7 +5,7 @@ let result = document.getElementById("result");
 
 convert.addEventListener("click", () => {
     let value = Number(num.value);
-    if (isNaN(value)) {
+    if (isNaN(value) || value >100000000) {
         result.innerHTML = "Please enter a valid number";
         return;
     }
