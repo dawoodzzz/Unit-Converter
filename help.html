@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Help & Support - Unit Converter Guide">
+    <title>Help | Unit Converter</title>
+    <link rel="stylesheet" href="index.css">
+    <style>
+        .help-container {
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+
+        .help-hero {
+            text-align: center;
+            margin-bottom: 50px;
+            padding: 40px;
+            background: linear-gradient(135deg, rgba(100, 200, 255, 0.1), rgba(167, 139, 250, 0.08));
+            border: 1px solid rgba(100, 200, 255, 0.2);
+            border-radius: 20px;
+        }
+
+        .help-hero h1 {
+            font-size: 3rem;
+            background: linear-gradient(135deg, #64c8ff, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+        }
+
+        .help-hero p {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .help-section {
+            background: linear-gradient(135deg, rgba(20, 30, 60, 0.95), rgba(15, 52, 96, 0.95));
+            border: 1px solid rgba(100, 200, 255, 0.2);
+            border-radius: 18px;
+            padding: 35px;
+            margin-bottom: 35px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .help-title {
+            font-size: 1.6rem;
+            color: #64c8ff;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid rgba(100, 200, 255, 0.3);
+            font-weight: 800;
+        }
+
+        .faq-item {
+            margin-bottom: 25px;
+            border-bottom: 1px solid rgba(100, 200, 255, 0.15);
+            padding-bottom: 20px;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .faq-question {
+            font-size: 1.1rem;
+            color: #a78bfa;
+            font-weight: 700;
+            margin-bottom: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            transition: color 0.3s ease;
+        }
+
+        .faq-question:hover {
+            color: #64c8ff;
+        }
+
+        .faq-question::before {
+            content: '▶';
+            display: inline-block;
+            margin-right: 12px;
+            font-size: 0.8rem;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.open .faq-question::before {
+            transform: rotate(90deg);
+        }
+
+        .faq-answer {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.8;
+            font-size: 0.95rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .faq-item.open .faq-answer {
+            max-height: 500px;
+        }
+
+        .step-box {
+            background: rgba(100, 200, 255, 0.1);
+            border: 1px solid rgba(100, 200, 255, 0.2);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            display: flex;
+            gap: 20px;
+        }
+
+        .step-number {
+            min-width: 50px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #64c8ff, #a78bfa);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #0f0f1f;
+            font-weight: 800;
+            font-size: 1.5rem;
+        }
+
+        .step-content h4 {
+            color: #64c8ff;
+            margin: 0 0 8px 0;
+            font-weight: 700;
+        }
+
+        .step-content p {
+            color: rgba(255, 255, 255, 0.8);
+            margin: 0;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .shortcut-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .shortcut-item {
+            background: rgba(100, 200, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(100, 200, 255, 0.2);
+        }
+
+        .shortcut-key {
+            color: #64c8ff;
+            font-weight: 700;
+            font-family: monospace;
+            background: rgba(100, 200, 255, 0.2);
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+
+        .shortcut-desc {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+            margin-top: 8px;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-bottom: 30px;
+            padding: 12px 24px;
+            background: linear-gradient(135deg, rgba(100, 200, 255, 0.3), rgba(167, 139, 250, 0.2));
+            border: 2px solid rgba(100, 200, 255, 0.5);
+            color: #64c8ff;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            background: linear-gradient(135deg, rgba(100, 200, 255, 0.5), rgba(167, 139, 250, 0.4));
+            border-color: #64c8ff;
+            box-shadow: 0 5px 15px rgba(100, 200, 255, 0.3);
+        }
+
+        .contact-box {
+            text-align: center;
+            background: linear-gradient(135deg, rgba(100, 200, 255, 0.1), rgba(167, 139, 250, 0.08));
+            border: 2px solid rgba(100, 200, 255, 0.3);
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 40px;
+        }
+
+        .contact-box h3 {
+            color: #64c8ff;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+
+        .contact-box p {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 15px;
+        }
+
+        .contact-box a {
+            color: #64c8ff;
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .contact-box a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 600px) {
+            .help-hero {
+                padding: 30px 20px;
+            }
+
+            .help-hero h1 {
+                font-size: 2rem;
+            }
+
+            .help-section {
+                padding: 25px;
+            }
+
+            .step-box {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .step-number {
+                align-self: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-logo">
+                <span class="logo-icon">⚙️</span>
+                <span class="logo-text">Unit Converter</span>
+            </div>
+            
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="about.html" class="nav-link">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="help.html" class="nav-link active">Help</a>
+                </li>
+            </ul>
+
+            <div class="nav-auth">
+                <a href="login.html" class="btn-login">Login</a>
+                <a href="signup.html" class="btn-signup">Sign Up</a>
+            </div>
+
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="help-container">
+        <a href="index.html" class="back-button">← Back to Home</a>
+
+        <div class="help-hero">
+            <h1>Help & Support</h1>
+            <p>Find answers to your questions and learn how to use Unit Converter</p>
+        </div>
+
+        <!-- Getting Started -->
+        <div class="help-section">
+            <h2 class="help-title">🚀 Getting Started</h2>
+            
+            <div class="step-box">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h4>Select a Conversion Type</h4>
+                    <p>Choose from the dropdown menu what type of conversion you want to perform (Length, Volume, Mass, etc.)</p>
+                </div>
+            </div>
+
+            <div class="step-box">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h4>Enter Your Value</h4>
+                    <p>Type the value you want to convert in the input field</p>
+                </div>
+            </div>
+
+            <div class="step-box">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h4>Select Units</h4>
+                    <p>Choose which units to convert FROM and TO</p>
+                </div>
+            </div>
+
+            <div class="step-box">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <h4>Get Your Result</h4>
+                    <p>The converted value appears instantly. Click the result to copy it or save to history</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Available Conversions -->
+        <div class="help-section">
+            <h2 class="help-title">📊 Available Conversions</h2>
+            <p style="color: rgba(255, 255, 255, 0.8); margin-bottom: 20px;">Unit Converter supports the following conversion categories:</p>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                <div style="background: rgba(100, 200, 255, 0.1); padding: 15px; border-radius: 10px; border: 1px solid rgba(100, 200, 255, 0.2);">
+                    <div style="color: #64c8ff; font-weight: 700; margin-bottom: 8px;">📏 Length</div>
+                    <div style="color: rgba(255, 255, 255, 0.7); font-size: 0.9rem;">km, mi, m, cm, in, ft, yd</div>
+                </div>
+
+                <div style="background: rgba(100, 200, 255, 0.1); padding: 15px; border-radius: 10px; border: 1px solid rgba(100, 200, 255, 0.2);">
+                    <div style="color: #64c8ff; font-weight: 700; margin-bottom: 8px;">📦 Volume & Mass</div>
+                    <div style="color: rgba(255, 255, 255, 0.7); font-size: 0.9rem;">L, gal, ml, oz, kg, lbs, g</div>
+                </div>
+
+                <div style="background: rgba(100, 200, 255, 0.1); padding: 15px; border-radius: 10px; border: 1px solid rgba(100, 200, 255, 0.2);">
+                    <div style="color: #64c8ff; font-weight: 700; margin-bottom: 8px;">🌡️ Temperature</div>
+                    <div style="color: rgba(255, 255, 255, 0.7); font-size: 0.9rem;">°C, °F, K</div>
+                </div>
+
+                <div style="background: rgba(100, 200, 255, 0.1); padding: 15px; border-radius: 10px; border: 1px solid rgba(100, 200, 255, 0.2);">
+                    <div style="color: #64c8ff; font-weight: 700; margin-bottom: 8px;">📐 Area</div>
+                    <div style="color: rgba(255, 255, 255, 0.7); font-size: 0.9rem;">m², ft², km², mi²</div>
+                </div>
+
+                <div style="background: rgba(100, 200, 255, 0.1); padding: 15px; border-radius: 10px; border: 1px solid rgba(100, 200, 255, 0.2);">
+                    <div style="color: #64c8ff; font-weight: 700; margin-bottom: 8px;">⚡ Speed & Other</div>
+                    <div style="color: rgba(255, 255, 255, 0.7); font-size: 0.9rem;">km/h, mph, m/s, ft/s</div>
+                </div>
+
+                <div style="background: rgba(100, 200, 255, 0.1); padding: 15px; border-radius: 10px; border: 1px solid rgba(100, 200, 255, 0.2);">
+                    <div style="color: #64c8ff; font-weight: 700; margin-bottom: 8px;">⚙️ Energy & Pressure</div>
+                    <div style="color: rgba(255, 255, 255, 0.7); font-size: 0.9rem;">J, cal, kWh, Pa, atm, psi</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Account & Features -->
+        <div class="help-section">
+            <h2 class="help-title">👤 Account & Features</h2>
+            
+            <div class="faq-item open">
+                <div class="faq-question">Do I need to create an account?</div>
+                <div class="faq-answer">
+                    No, the basic conversion tool works without an account. However, creating an account allows you to save your conversion history and preferences.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">How do I create an account?</div>
+                <div class="faq-answer">
+                    Click the "Sign Up" button in the top navigation bar, fill in your information (name, email, password), and click "Create Account". You'll be logged in automatically.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">How do I save my conversion history?</div>
+                <div class="faq-answer">
+                    When logged in, all your conversions are automatically saved to your history. You can see them in the History panel on the main page. Click any history item to quickly repeat that conversion.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Can I delete my account?</div>
+                <div class="faq-answer">
+                    Yes, you can log out at any time. If you want to permanently delete your account data, please contact our support team.
+                </div>
+            </div>
+        </div>
+
+        <!-- Tips & Tricks -->
+        <div class="help-section">
+            <h2 class="help-title">💡 Tips & Tricks</h2>
+            
+            <div style="margin-bottom: 25px;">
+                <h3 style="color: #64c8ff; margin-bottom: 12px; font-weight: 700;">Quick Conversions</h3>
+                <p style="color: rgba(255, 255, 255, 0.8); line-height: 1.8;">
+                    Once you've made a conversion, the result is displayed with a copy button. Click it to quickly copy the result to your clipboard!
+                </p>
+            </div>
+
+            <div style="margin-bottom: 25px;">
+                <h3 style="color: #64c8ff; margin-bottom: 12px; font-weight: 700;">History Panel</h3>
+                <p style="color: rgba(255, 255, 255, 0.8); line-height: 1.8;">
+                    The history panel on the right side shows your recent conversions. Click any item to instantly repeat that conversion with the same values and units.
+                </p>
+            </div>
+
+            <div style="margin-bottom: 25px;">
+                <h3 style="color: #64c8ff; margin-bottom: 12px; font-weight: 700;">Mobile Friendly</h3>
+                <p style="color: rgba(255, 255, 255, 0.8); line-height: 1.8;">
+                    Unit Converter works perfectly on mobile devices. On smaller screens, the history panel automatically hides to give you more space for conversions.
+                </p>
+            </div>
+
+            <div>
+                <h3 style="color: #64c8ff; margin-bottom: 12px; font-weight: 700;">Keyboard Navigation</h3>
+                <p style="color: rgba(255, 255, 255, 0.8); line-height: 1.8; margin-bottom: 15px;">
+                    Use the Tab key to navigate between fields and the Enter key to quickly convert.
+                </p>
+            </div>
+        </div>
+
+        <!-- Troubleshooting -->
+        <div class="help-section">
+            <h2 class="help-title">🔧 Troubleshooting</h2>
+            
+            <div class="faq-item open">
+                <div class="faq-question">My conversion result looks wrong</div>
+                <div class="faq-answer">
+                    Make sure you've selected the correct units to convert FROM and TO. Double-check that you've entered the value correctly. All conversions are based on standard mathematical formulas, so accuracy is guaranteed.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">I can't log in to my account</div>
+                <div class="faq-answer">
+                    Make sure you're using the correct email and password. Passwords are case-sensitive. If you forgot your password, please contact support.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">My history is empty</div>
+                <div class="faq-answer">
+                    If you're not logged in, history is temporary and stored locally. Once you refresh the page without logging in, it's cleared. Create an account and log in to save your history permanently.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">The website looks broken on my device</div>
+                <div class="faq-answer">
+                    Try refreshing the page or clearing your browser cache. Make sure you're using a modern browser like Chrome, Firefox, Safari, or Edge. If the problem persists, please contact support.
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Support -->
+        <div class="contact-box">
+            <h3>Still Need Help?</h3>
+            <p>Can't find what you're looking for? Our support team is here to help!</p>
+            <p>
+                <strong>Email:</strong> <a href="mailto:support@unitconverter.com">support@unitconverter.com</a>
+            </p>
+            <p style="color: rgba(255, 255, 255, 0.6); font-size: 0.9rem;">We typically respond within 24 hours</p>
+        </div>
+
+        <div style="text-align: center; padding: 40px 20px; color: rgba(255, 255, 255, 0.6);">
+            <p>&copy; 2026 Unit Converter. All rights reserved.</p>
+        </div>
+    </div>
+
+    <script>
+        // FAQ toggle functionality
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', function() {
+                const faqItem = this.parentElement;
+                faqItem.classList.toggle('open');
+            });
+        });
+
+        // Check if user is logged in and update nav
+        const currentUser = localStorage.getItem('currentUser');
+        if (currentUser) {
+            const user = JSON.parse(currentUser);
+            const navAuth = document.querySelector('.nav-auth');
+            navAuth.innerHTML = `
+                <button class="btn-user" onclick="toggleUserMenu()" style="background: linear-gradient(135deg, rgba(100, 200, 255, 0.3), rgba(167, 139, 250, 0.2)); border: 2px solid rgba(100, 200, 255, 0.6); padding: 10px 24px; border-radius: 8px; color: #64c8ff; font-weight: 700; cursor: pointer;">
+                    👤 ${user.name.split(' ')[0]}
+                </button>
+            `;
+        }
+    </script>
+</body>
+</html>

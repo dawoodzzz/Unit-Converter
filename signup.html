@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sign up for Unit Converter - Create your account to save conversions">
+    <title>Sign Up | Unit Converter</title>
+    <link rel="stylesheet" href="index.css">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .signup-wrapper {
+            width: 100%;
+            max-width: 500px;
+            margin-top: 80px;
+        }
+
+        .signup-container {
+            background: linear-gradient(135deg, rgba(20, 30, 60, 0.95), rgba(15, 52, 96, 0.95));
+            border: 2px solid rgba(100, 200, 255, 0.3);
+            border-radius: 25px;
+            padding: 50px 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(10px);
+        }
+
+        .signup-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .signup-header h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, #64c8ff, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+
+        .signup-header p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.95rem;
+        }
+
+        .form-group {
+            margin-bottom: 22px;
+        }
+
+        .form-group label {
+            display: block;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 700;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 14px 16px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 2px solid rgba(100, 200, 255, 0.3);
+            border-radius: 12px;
+            color: #fff;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        .form-group input::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.12);
+            border-color: #64c8ff;
+            box-shadow: 0 0 20px rgba(100, 200, 255, 0.3);
+        }
+
+        .password-strength {
+            margin-top: 8px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .strength-bar {
+            height: 100%;
+            width: 0%;
+            background: #ff6b6b;
+            transition: width 0.3s ease, background 0.3s ease;
+        }
+
+        .strength-text {
+            margin-top: 5px;
+            font-size: 0.8rem;
+            color: #ff6b6b;
+        }
+
+        .form-group input:focus ~ .strength-text {
+            color: #4ade80;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            margin-right: 10px;
+            cursor: pointer;
+            accent-color: #64c8ff;
+        }
+
+        .checkbox-group label {
+            margin: 0;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .checkbox-group a {
+            color: #64c8ff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .checkbox-group a:hover {
+            color: #a78bfa;
+            text-decoration: underline;
+        }
+
+        .btn-signup {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #64c8ff, #a78bfa);
+            border: none;
+            border-radius: 12px;
+            color: #0f0f1f;
+            font-size: 1rem;
+            font-weight: 800;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(100, 200, 255, 0.3);
+        }
+
+        .btn-signup:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(100, 200, 255, 0.5);
+        }
+
+        .btn-signup:active {
+            transform: translateY(0);
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 25px;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.95rem;
+        }
+
+        .login-link a {
+            color: #64c8ff;
+            text-decoration: none;
+            font-weight: 700;
+            transition: color 0.3s ease;
+        }
+
+        .login-link a:hover {
+            color: #a78bfa;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, rgba(100, 200, 255, 0.3), rgba(167, 139, 250, 0.2));
+            border: 2px solid rgba(100, 200, 255, 0.5);
+            color: #64c8ff;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .back-button:hover {
+            background: linear-gradient(135deg, rgba(100, 200, 255, 0.5), rgba(167, 139, 250, 0.4));
+            border-color: #64c8ff;
+            box-shadow: 0 5px 15px rgba(100, 200, 255, 0.3);
+        }
+
+        .error-message {
+            background: rgba(255, 107, 107, 0.2);
+            border: 1px solid #ff6b6b;
+            color: #ff9999;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+            font-size: 0.9rem;
+        }
+
+        .success-message {
+            background: rgba(74, 222, 128, 0.2);
+            border: 1px solid #4ade80;
+            color: #4ade80;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 600px) {
+            .signup-container {
+                padding: 30px 20px;
+            }
+
+            .signup-header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-logo">
+                <span class="logo-icon">⚙️</span>
+                <span class="logo-text">Unit Converter</span>
+            </div>
+            
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="about.html" class="nav-link">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="help.html" class="nav-link">Help</a>
+                </li>
+            </ul>
+
+            <div class="nav-auth">
+                <a href="login.html" class="btn-login">Login</a>
+                <a href="signup.html" class="btn-signup">Sign Up</a>
+            </div>
+
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="signup-wrapper">
+        <a href="index.html" class="back-button">← Back to Home</a>
+
+        <div class="signup-container">
+            <div class="signup-header">
+                <h1>Create Account</h1>
+                <p>Join Unit Converter to save your conversions</p>
+            </div>
+
+            <div class="error-message" id="errorMessage"></div>
+            <div class="success-message" id="successMessage"></div>
+
+            <form id="signupForm" onsubmit="handleSignup(event)">
+                <div class="form-group">
+                    <label for="fullName">Full Name</label>
+                    <input type="text" id="fullName" placeholder="John Doe" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" placeholder="you@example.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="At least 6 characters" required onkeyup="checkPasswordStrength()">
+                    <div class="password-strength">
+                        <div class="strength-bar" id="strengthBar"></div>
+                    </div>
+                    <div class="strength-text" id="strengthText">Weak</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input type="password" id="confirmPassword" placeholder="Confirm your password" required>
+                </div>
+
+                <div class="checkbox-group">
+                    <input type="checkbox" id="terms" required>
+                    <label for="terms">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></label>
+                </div>
+
+                <button type="submit" class="btn-signup">Create Account</button>
+            </form>
+
+            <div class="login-link">
+                Already have an account? <a href="login.html">Login here</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Check if user is already logged in
+        const currentUser = localStorage.getItem('currentUser');
+        if (currentUser) {
+            window.location.href = 'index.html';
+        }
+
+        function checkPasswordStrength() {
+            const password = document.getElementById('password').value;
+            const strengthBar = document.getElementById('strengthBar');
+            const strengthText = document.getElementById('strengthText');
+            
+            let strength = 0;
+            const patterns = {
+                weak: /.{6,}/,
+                fair: /^(?=.*[a-z])(?=.*[A-Z]).{6,}/,
+                good: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,}/,
+                strong: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}/
+            };
+
+            if (patterns.weak.test(password)) strength = 25;
+            if (patterns.fair.test(password)) strength = 50;
+            if (patterns.good.test(password)) strength = 75;
+            if (patterns.strong.test(password)) strength = 100;
+
+            strengthBar.style.width = strength + '%';
+            
+            if (strength <= 25) {
+                strengthBar.style.background = '#ff6b6b';
+                strengthText.textContent = 'Weak';
+                strengthText.style.color = '#ff6b6b';
+            } else if (strength <= 50) {
+                strengthBar.style.background = '#fbbf24';
+                strengthText.textContent = 'Fair';
+                strengthText.style.color = '#fbbf24';
+            } else if (strength <= 75) {
+                strengthBar.style.background = '#60a5fa';
+                strengthText.textContent = 'Good';
+                strengthText.style.color = '#60a5fa';
+            } else {
+                strengthBar.style.background = '#4ade80';
+                strengthText.textContent = 'Strong';
+                strengthText.style.color = '#4ade80';
+            }
+        }
+
+        function handleSignup(e) {
+            e.preventDefault();
+            
+            const fullName = document.getElementById('fullName').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const errorDiv = document.getElementById('errorMessage');
+            const successDiv = document.getElementById('successMessage');
+
+            // Clear messages
+            errorDiv.style.display = 'none';
+            successDiv.style.display = 'none';
+
+            // Validation
+            if (!fullName.trim()) {
+                errorDiv.textContent = 'Please enter your full name';
+                errorDiv.style.display = 'block';
+                return;
+            }
+
+            if (!email.includes('@')) {
+                errorDiv.textContent = 'Please enter a valid email address';
+                errorDiv.style.display = 'block';
+                return;
+            }
+
+            if (password.length < 6) {
+                errorDiv.textContent = 'Password must be at least 6 characters';
+                errorDiv.style.display = 'block';
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                errorDiv.textContent = 'Passwords do not match';
+                errorDiv.style.display = 'block';
+                return;
+            }
+
+            // Check if user already exists
+            const users = JSON.parse(localStorage.getItem('users') || '[]');
+            if (users.find(u => u.email === email)) {
+                errorDiv.textContent = 'This email is already registered';
+                errorDiv.style.display = 'block';
+                return;
+            }
+
+            // Create new user
+            const newUser = {
+                id: Date.now(),
+                name: fullName,
+                email: email,
+                password: password,
+                createdAt: new Date().toISOString()
+            };
+
+            users.push(newUser);
+            localStorage.setItem('users', JSON.stringify(users));
+
+            // Auto login
+            localStorage.setItem('currentUser', JSON.stringify({name: newUser.name, email: newUser.email}));
+
+            successDiv.textContent = 'Account created successfully! Redirecting...';
+            successDiv.style.display = 'block';
+
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 1500);
+        }
+    </script>
+</body>
+</html>

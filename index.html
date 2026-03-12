@@ -1,39 +1,184 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unit Converter</title>
+    <meta name="description" content="Professional Unit Converter - Fast, accurate conversions for length, volume, mass, temperature, area, speed, and more. Try now!">
+    <title>Professional Unit Converter | Convert Any Unit Instantly</title>
     <link rel="stylesheet" href="index.css">
 </head>
-
 <body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-logo">
+                <span class="logo-icon">⚙️</span>
+                <span class="logo-text">Unit Converter</span>
+            </div>
+            
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link active">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="about.html" class="nav-link">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="help.html" class="nav-link">Help</a>
+                </li>
+            </ul>
 
+            <div class="nav-auth">
+                <button onclick="goToLogin()" class="btn-login">Login</button>
+                <a href="signup.html" class="btn-signup">Sign Up</a>
+            </div>
 
-    <div id="main">
-        <div id="heading">
-            <h1>Unit Converter</h1>
-
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
-        <p>Convert between different units of measurement</p>
-        <div id="top">
+    </nav>
 
-            <input type="number" id="input" name="input" placeholder="Enter a number" title="input">
-            <select id="type" name="type" title="type">
-                <option value="length">Length</option>
-                <option value="volume">Volume</option>
-                <option value="mass">Mass</option>
-            </select>
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeLoginModal()">&times;</span>
+            <h2>Login</h2>
+            <form id="loginForm" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" required placeholder="Enter your email">
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" required placeholder="Enter your password">
+                </div>
+                <div class="form-group checkbox">
+                    <input type="checkbox" id="rememberMe">
+                    <label for="rememberMe">Remember me</label>
+                </div>
+                <button type="submit" class="btn-primary">Login</button>
+                <p class="form-footer">Don't have an account? <a href="#" onclick="switchToSignup()">Sign up here</a></p>
+            </form>
         </div>
-
-        <button id="convert">Convert</button>
-
-        <div id="result"></div>
     </div>
 
+    <!-- Signup Modal -->
+    <div id="signupModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeSignupModal()">&times;</span>
+            <h2>Create Account</h2>
+            <form id="signupForm" onsubmit="handleSignup(event)">
+                <div class="form-group">
+                    <label for="signupName">Full Name</label>
+                    <input type="text" id="signupName" required placeholder="Enter your full name">
+                </div>
+                <div class="form-group">
+                    <label for="signupEmail">Email</label>
+                    <input type="email" id="signupEmail" required placeholder="Enter your email">
+                </div>
+                <div class="form-group">
+                    <label for="signupPassword">Password</label>
+                    <input type="password" id="signupPassword" required placeholder="Create a password">
+                </div>
+                <div class="form-group">
+                    <label for="signupConfirm">Confirm Password</label>
+                    <input type="password" id="signupConfirm" required placeholder="Confirm your password">
+                </div>
+                <button type="submit" class="btn-primary">Create Account</button>
+                <p class="form-footer">Already have an account? <a href="#" onclick="switchToLogin()">Login here</a></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- User Menu (appears when logged in) -->
+    <div id="userMenu" class="user-menu hidden">
+        <div class="user-info">
+            <div class="user-avatar">👤</div>
+            <div class="user-details">
+                <div class="user-name">User</div>
+                <div class="user-email">user@example.com</div>
+            </div>
+        </div>
+        <hr>
+        <a href="#" class="menu-item">Profile</a>
+        <a href="#" class="menu-item">Settings</a>
+        <a href="#" class="menu-item">History</a>
+        <hr>
+        <a href="#" class="menu-item logout" onclick="handleLogout()">Logout</a>
+    </div>
+    <div class="container">
+        <main id="main" class="converter">
+            <header class="header">
+                <h1>Unit Converter</h1>
+                <p class="subtitle">Convert between different units of measurement instantly</p>
+            </header>
+
+            <section class="input-section">
+                <div class="input-group">
+                    <label for="input" class="label">Enter Value:</label>
+                    <input 
+                        type="number" 
+                        id="input" 
+                        name="input" 
+                        placeholder="Enter a number" 
+                        title="Input value for conversion"
+                        step="0.01"
+                    >
+                </div>
+
+                <div class="input-group">
+                    <label for="type" class="label">Conversion Type:</label>
+                    <select id="type" name="type" title="Select conversion type">
+                        <optgroup label="Distance">
+                            <option value="length">Length (km ↔ mi)</option>
+                            <option value="distance-cm">Centimeters (cm ↔ in)</option>
+                            <option value="distance-ft">Feet & Meters (ft ↔ m)</option>
+                        </optgroup>
+                        <optgroup label="Volume">
+                            <option value="volume">Volume (L ↔ gal)</option>
+                            <option value="volume-ml">Milliliters (ml ↔ fl oz)</option>
+                        </optgroup>
+                        <optgroup label="Weight">
+                            <option value="mass">Mass (kg ↔ lbs)</option>
+                            <option value="weight-g">Grams (g ↔ oz)</option>
+                        </optgroup>
+                        <optgroup label="Temperature">
+                            <option value="temperature">Temperature (°C ↔ °F)</option>
+                            <option value="temp-kelvin">Kelvin (K ↔ °C)</option>
+                        </optgroup>
+                        <optgroup label="Area">
+                            <option value="area">Area (m² ↔ ft²)</option>
+                            <option value="area-km">Large Area (km² ↔ mi²)</option>
+                        </optgroup>
+                        <optgroup label="Speed">
+                            <option value="speed">Speed (km/h ↔ mph)</option>
+                            <option value="speed-ms">Speed (m/s ↔ ft/s)</option>
+                        </optgroup>
+                        <optgroup label="Energy">
+                            <option value="energy">Energy (joules ↔ calories)</option>
+                            <option value="pressure">Pressure (Pa ↔ psi)</option>
+                        </optgroup>
+                    </select>
+                </div>
+            </section>
+
+            <div class="button-group">
+                <button id="convert" class="convert-btn">Convert</button>
+                <button id="clear" class="clear-btn">Clear</button>
+            </div>
+
+            <div id="result" class="result-container"></div>
+            <div id="history" class="history-container"></div>
+        </main>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2026 Unit Converter. All rights reserved.</p>
+    </footer>
 
     <script src="index.js"></script>
 </body>
-
 </html>
